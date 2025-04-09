@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { useAppContext } from "../context/useAppContext";
+import React, { useState } from "react";
 import { renderLog } from "../utils";
+import { memo } from "../@lib";
+import { useNotiContext } from "../contexts/notification/useNotiContext";
 
 // ComplexForm 컴포넌트
-export const ComplexForm: React.FC = () => {
+const ComplexForm: React.FC = () => {
   renderLog("ComplexForm rendered");
-  const { addNotification } = useAppContext();
+  const { addNotification } = useNotiContext();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,7 +38,7 @@ export const ComplexForm: React.FC = () => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">복잡한 폼</h2>
+      <h2 className="mb-4 text-2xl font-bold">복잡한 폼</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -45,7 +46,7 @@ export const ComplexForm: React.FC = () => {
           value={formData.name}
           onChange={handleInputChange}
           placeholder="이름"
-          className="w-full p-2 border border-gray-300 rounded text-black"
+          className="w-full p-2 text-black border border-gray-300 rounded"
         />
         <input
           type="email"
@@ -53,7 +54,7 @@ export const ComplexForm: React.FC = () => {
           value={formData.email}
           onChange={handleInputChange}
           placeholder="이메일"
-          className="w-full p-2 border border-gray-300 rounded text-black"
+          className="w-full p-2 text-black border border-gray-300 rounded"
         />
         <input
           type="number"
@@ -61,7 +62,7 @@ export const ComplexForm: React.FC = () => {
           value={formData.age}
           onChange={handleInputChange}
           placeholder="나이"
-          className="w-full p-2 border border-gray-300 rounded text-black"
+          className="w-full p-2 text-black border border-gray-300 rounded"
         />
         <div className="space-x-4">
           {["독서", "운동", "음악", "여행"].map((pref) => (
@@ -70,7 +71,7 @@ export const ComplexForm: React.FC = () => {
                 type="checkbox"
                 checked={formData.preferences.includes(pref)}
                 onChange={() => handlePreferenceChange(pref)}
-                className="form-checkbox h-5 w-5 text-blue-600"
+                className="w-5 h-5 text-blue-600 form-checkbox"
               />
               <span className="ml-2">{pref}</span>
             </label>
@@ -78,7 +79,7 @@ export const ComplexForm: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
         >
           제출
         </button>
@@ -86,3 +87,5 @@ export const ComplexForm: React.FC = () => {
     </div>
   );
 };
+
+export default memo(ComplexForm);

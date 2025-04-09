@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { generateItems } from "./utils";
-import AppProvider from "./context/AppProvider";
 import { ItemList } from "./item/ItemList";
-import { ComplexForm } from "./complex/ComplexForm";
-import Layout from "./layout/Main";
+import Layout from "./layout/Layout";
+import ComplexForm from "./complex/ComplexForm";
+import { CombinedProvider } from "./contexts/CombinedProvider";
 
 // 메인 App 컴포넌트
 const App: React.FC = () => {
@@ -17,7 +17,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <AppProvider>
+    <CombinedProvider>
       <Layout>
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row">
@@ -30,7 +30,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+    </CombinedProvider>
   );
 };
 
